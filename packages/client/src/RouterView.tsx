@@ -18,9 +18,8 @@ const DEFAULT_PAGES = import.meta.glob(
 
 function pathToIsoPattern(key: string): string {
   let routePath = key
-    .replace(/^\.\.\/pages/, "")
-    .replace(/^\/src\/pages/, "")
-    .replace(/\.(t|j)sx$/, "");
+    .replace(/\.(t|j)sx$/, "")
+    .replace(/^(?:.*\/)?pages(?=\/)/, "");
 
   if (routePath.endsWith("/index")) {
     routePath = routePath.replace(/\/index$/, "") || "/";
