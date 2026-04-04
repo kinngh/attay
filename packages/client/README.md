@@ -61,7 +61,7 @@ import { render } from "preact";
 import { LocationProvider } from "preact-iso";
 import RouterView from "@attayjs/client";
 
-const pages = import.meta.glob("/src/features/blog/pages/**/!(_)*.{tsx,jsx}");
+const pages = import.meta.glob("./features/blog/pages/**/*.{tsx,jsx}");
 
 render(
   <LocationProvider>
@@ -70,6 +70,14 @@ render(
   document.getElementById("app")!
 );
 ```
+
+Use a glob that resolves correctly from the file where you call `import.meta.glob()`.
+
+Attay derives route paths from the final `/pages/` segment in each matched key, so these all work as expected:
+
+- `./pages/index.jsx` -> `/`
+- `./features/blog/pages/post.jsx` -> `/post`
+- `./features/blog/pages/[slug].jsx` -> `/:slug`
 
 This keeps page discovery fully static and bundler-friendly, while letting you organize your app however you want.
 
